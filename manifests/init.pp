@@ -1,7 +1,7 @@
 class jpeg-optimize::optimize($release = "1.4.3") {
 
   $url = "https://github.com/tjko/jpegoptim/archive/RELEASE.${release}.tar.gz"
-  $filename = "jpegoptim-RELEASE.${release}.tar.gz"
+  $filename = "RELEASE.${release}"
 
 
   package { "libjpeg-turbo-devel":
