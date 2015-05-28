@@ -15,7 +15,6 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     path => "/usr/bin",
     creates => "/tmp/vagrant-cache/${filename}",
     timeout => 4800,
-    notice
   }
 
   notify {"tar -zxvf /tmp/vagrant-cache/${filename} -C /opt": }
