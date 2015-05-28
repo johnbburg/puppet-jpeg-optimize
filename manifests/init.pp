@@ -30,7 +30,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
   notify{"/opt/jpegoptim-RELEASE.${release}/configure": }
 
   exec { "jpeg-optimize::optimize::configure":
-    command => "/opt/jpegoptim-RELEASE.${release}/configure",
+    command => "sh opt/jpegoptim-RELEASE.${release}/configure",
     require => "Exec[jpeg-optimize::optimize::extract]",
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile"
   }
