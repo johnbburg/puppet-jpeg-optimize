@@ -22,7 +22,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     creates => "/opt/jpegoptim-RELEASE.${release}/README",
   }
 
-  exec { "jpeg-optimize"::optimize::configure":
+  exec { "jpeg-optimize::optimize::configure":
     command => "/opt/jpegoptim-RELEASE.${release}/configure",
     require => "Exec[jpeg-optimize::optimize::extract]",
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile"
