@@ -10,7 +10,7 @@ class jpeg-optimize ($release = "1.4.3") {
 
   exec { "jpeg-optimize::download":
     command => "wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}",
-    path => "/usr/bin/",
+    path => "/usr/bin",
     creates => "/tmp/vagrant-cache/${filename}",
     timeout => 4800,
   }
