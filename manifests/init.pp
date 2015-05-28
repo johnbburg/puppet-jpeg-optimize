@@ -24,14 +24,14 @@ class jpeg-optimize ($release = "1.4.3") {
 
   exec { "jpeg-optimize::configure":
     command => "/opt/jpegoptim-RELEASE.${release}/configure",
-    require => "jpeg-optimize::extract",
+    require => "[Exec[jpeg-optimize::extract]]",
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile"
   }
 
   exec { "jpeg-optimize::make":
     command => "make -C /opt/jpegoptim-RELEASE.${release}/",
     path => "/usr/bin",
-    require => "jpeg-optimize::configure",
+    require => "[Exec[jpeg-optimize::configure]]",
     creates => "/opt/jpegoptim-RELEASE.${release}/jpegoptim"
   }
 
