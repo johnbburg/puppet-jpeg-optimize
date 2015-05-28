@@ -1,4 +1,4 @@
-class jpeg-optimize ($release = "1.4.3") {
+class jpeg-optimize::optimize($release = "1.4.3") {
 
   $url = "https://github.com/tjko/jpegoptim/archive/RELEASE.${release}.tar.gz"
   $filename = "jpegoptim-RELEASE.${release}.tar.gz"
@@ -15,23 +15,23 @@ class jpeg-optimize ($release = "1.4.3") {
     timeout => 4800,
   }
 
-  exec { "jpeg-optimize::extract":
+  exec { "jpeg-optimize::optimize::extract":
     command => "tar -zxvf /tmp/vagrant-cache/${filename} -C /opt",
     path    => "/bin",
-    require => Exec["jpeg-optimize::download"],
+    require => Exec["jpeg-optimize::optimize::download"],
     creates => "/opt/jpegoptim-RELEASE.${release}/README",
   }
 
-  exec { "jpeg-optimize::configure":
+  exec { "jpeg-optimize"::optimize::configure":
     command => "/opt/jpegoptim-RELEASE.${release}/configure",
-    require => "Exec[jpeg-optimize::extract]",
+    require => "Exec[jpeg-optimize::optimize::extract]",
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile"
   }
 
-  exec { "jpeg-optimize::make":
+  exec { "jpeg-optimize::optimize::make":
     command => "make -C /opt/jpegoptim-RELEASE.${release}/",
     path => "/usr/bin",
-    require => "Exec[jpeg-optimize::configure]",
+    require => "Exec[jpeg-optimize::optimize::configure]",
     creates => "/opt/jpegoptim-RELEASE.${release}/jpegoptim"
   }
 
