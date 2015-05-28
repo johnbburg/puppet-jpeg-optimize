@@ -28,7 +28,7 @@ class jpeg-optimize ($release = "1.4.3") {
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile"
   }
 
-  exec { "jpeg-optimize::make"
+  exec { "jpeg-optimize::make":
     command => "make -C /opt/jpegoptim-RELEASE.${release}/",
     path => "/usr/bin",
     require => "jpeg-optimize::configure",
