@@ -8,7 +8,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     ensure => installed,
   }
 
-  notify"wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}"{}
+  notify{"wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}"}
 
   exec { "jpeg-optimize::optimize::download":
     command => "wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}",
