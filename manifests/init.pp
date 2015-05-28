@@ -8,7 +8,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     ensure => installed,
   }
 
-  notify {"wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}"}
+  notify {"wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}": }
 
   exec { "jpeg-optimize::optimize::download":
     command => "wget -O ${filename} --directory-prefix=/tmp/vagrant-cache ${url}",
@@ -18,7 +18,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     notice
   }
 
-  notify {"tar -zxvf /tmp/vagrant-cache/${filename} -C /opt"}
+  notify {"tar -zxvf /tmp/vagrant-cache/${filename} -C /opt": }
 
   exec { "jpeg-optimize::optimize::extract":
     command => "tar -zxvf /tmp/vagrant-cache/${filename} -C /opt",
@@ -27,7 +27,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     creates => "/opt/jpegoptim-RELEASE.${release}/README",
   }
 
-  notify{"/opt/jpegoptim-RELEASE.${release}/configure"}
+  notify{"/opt/jpegoptim-RELEASE.${release}/configure": }
 
   exec { "jpeg-optimize::optimize::configure":
     command => "/opt/jpegoptim-RELEASE.${release}/configure",
@@ -35,7 +35,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile"
   }
 
-  notify {"make -C /opt/jpegoptim-RELEASE.${release}/}
+  notify {"make -C /opt/jpegoptim-RELEASE.${release}/": }
 
   exec { "jpeg-optimize::optimize::make":
     command => "make -C /opt/jpegoptim-RELEASE.${release}/",
