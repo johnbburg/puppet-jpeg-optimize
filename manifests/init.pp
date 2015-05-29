@@ -47,5 +47,19 @@ class jpeg-optimize::optimize($release = "1.4.3") {
     creates => "/opt/jpegoptim-RELEASE.${release}/jpegoptim"
   }
 
+  exec { "jpeg-optimize::optimize::make-strip":
+    command => "make -C /opt/jpegoptim-RELEASE.${release}/ strip",
+    path => "/usr/bin",
+    require => Exec["jpeg-optimize::optimize::make"],
+    creates => "/opt/jpegoptim-RELEASE.${release}/jpegoptim"
+  }
+
+  exec { "jpeg-optimize::optimize::make-install":
+    command => "sudo make -C /opt/jpegoptim-RELEASE.${release}/ install",
+    path => "/usr/bin",
+    require => Exec["jpeg-optimize::optimize::make-strip"],
+    creates => "/opt/jpegoptim-RELEASE.${release}/jpegoptim"
+  }
+
 }
 
