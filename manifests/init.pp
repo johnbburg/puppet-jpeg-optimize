@@ -31,7 +31,7 @@ class jpeg-optimize::optimize($release = "1.4.3") {
 
   exec { "jpeg-optimize::optimize::configure":
     command => "sh -i /opt/jpegoptim-RELEASE.${release}/configure",
-    path    => ["/bin", ""],
+    path    => ["/bin", "/usr/bin"],
     require => Exec["jpeg-optimize::optimize::extract"],
     creates => "/opt/jpegoptim-RELEASE.${release}/Makefile",
     cwd => "/opt/jpegoptim-RELEASE.${release}",
